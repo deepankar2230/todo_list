@@ -1,11 +1,15 @@
 from django.shortcuts import render
-
+from .models import *
 # Create your views here.
 
-<<<<<<< HEAD
-def home(request) :
-    return render (request ,'home.html')
-=======
 def home(request):
-    return render(request, 'home.html')
->>>>>>> ffe56e946e8b819e6a49197869e42379a86883f6
+    all_todos = Todo.objects.all()
+    d = {'all_todos': all_todos}
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        desc = request.POST.get('desc')
+        TO = Todo(title=title, desc=desc)
+        TO.save()
+    return render(request, 'home.html', d)
+
+
