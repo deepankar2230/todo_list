@@ -26,3 +26,8 @@ def update(request, pk):
         todo.save()
         return HttpResponseRedirect(reverse('home'))
     return render(request, 'update.html', d)
+
+def delete(request, pk):
+    TO = Todo.objects.get(pk=pk)
+    TO.delete()
+    return HttpResponseRedirect(reverse('home'))
